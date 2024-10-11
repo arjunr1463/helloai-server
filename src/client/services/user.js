@@ -19,6 +19,21 @@ const userService = {
       data: token,
     };
   },
+
+  getService: async () => {
+    const userId = id;
+    const findUser = await user.findById(userId);
+    if (!findUser) {
+      return {
+        status: false,
+        message: "User not found",
+      };
+    }
+    return {
+      status: true,
+      data: findUser,
+    };
+  },
 };
 
 module.exports = userService;

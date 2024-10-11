@@ -11,6 +11,18 @@ const mongoose = require("mongoose");
 const conversationService = {
   createService: async (data) => {
     const userId = id;
+    if (data.prompt === "") {
+      return {
+        status: false,
+        message: "please write any message",
+      };
+    }
+    if (data.chat === undefined) {
+      return {
+        status: false,
+        message: "chat not found",
+      };
+    }
     const findSubject = await subject.findOne({ name: data.subject });
     if (!findSubject) {
       return {
