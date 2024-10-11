@@ -57,6 +57,28 @@ const chatService = {
   },
 
   renameService: async (data) => {
+    const userId = id;
+    const findChat = await chat.findOne({
+      user: userId,
+      subject: data.subject,
+      name_lowercase: data.name.toLowerCase(),
+    });
+
+    if (findChat) {
+      return {
+        status: false,
+        message: "name already exist",
+      };
+    }
+    await chat.findByIdAndUpdate(
+      data.chatId,
+      {
+        name: data.name,
+        name_lowercase: data.name.toLowerCase(),
+        updated_on: Date.now(),
+      },
+      { new: true }
+    );
     return {
       status: true,
       message: "Updated successfully",
@@ -64,7 +86,6 @@ const chatService = {
   },
 
   deleteService: async (query) => {
-
     if (!query.chatId) {
       return {
         status: false,

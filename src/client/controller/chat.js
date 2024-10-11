@@ -29,7 +29,7 @@ const getController = async (req, res, next) => {
 };
 const renameController = async (req, res, next) => {
   try {
-    const result = await chatService.renameService(req.data);
+    const result = await chatService.renameService(req.body);
     if (result.status) {
       return res.status(200).json(result);
     } else {
