@@ -3,6 +3,7 @@ const chat = require("../../../models/chat");
 
 //module
 const mongoose = require("mongoose");
+const conversation = require("../../../models/coversation");
 
 const chatService = {
   createService: async (data) => {
@@ -52,6 +53,33 @@ const chatService = {
     return {
       status: true,
       data: allChat,
+    };
+  },
+
+  renameService: async (data) => {
+    return {
+      status: true,
+      message: "Updated successfully",
+    };
+  },
+
+  deleteService: async (query) => {
+
+    if (!query.chatId) {
+      return {
+        status: false,
+        message: "chat not found",
+      };
+    }
+    await conversation.deleteMany({
+      chat: query.chatId,
+    });
+    await chat.deleteOne({
+      _id: query.chatId,
+    });
+    return {
+      status: true,
+      message: "Deleted successfully",
     };
   },
 };

@@ -12,6 +12,7 @@ const conversationSchema = new mongoose.Schema({
 
 //indexing
 conversationSchema.index({ user: 1, chat: 1, created_on: 1, subject: 1 });
+conversationSchema.index({ chat: 1 });
 
 const conversation = mongoose.model("Conversation", conversationSchema);
 
