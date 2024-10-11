@@ -9,6 +9,14 @@ const subjectService = {
       data: newSubject,
     };
   },
+
+  getService: async () => {
+    const subjects = await subject.find();
+    return {
+      status: true,
+      data: subjects,
+    };
+  },
 };
 
 module.exports = subjectService;
